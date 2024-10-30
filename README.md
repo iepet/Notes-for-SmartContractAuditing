@@ -11,6 +11,10 @@ This repository gathers structured notes, tools, and best practices for auditing
 
 ---
 
+## 0. Onboarding
+
+Make sure there the clienthas the minimal onboarding information for us to start the security review. A good document to check is the one provided by updraftcyfrin.io [Minimal Onboarding](minimalOnboarding.md)
+
 ## 1. Scoping
 
 Scoping is the first step in any smart contract audit. This step involves understanding the scope of the audit, including identifying the roles, privileges, external dependencies, and potential vulnerabilities in the smart contract.
@@ -82,7 +86,7 @@ All data stored on-chain is visible to anyone. Therefore the private `PasswordSt
 
 Due to this, the overall architecture of the contract should be rethought. One could encrypt the password off-chain, and then store the encrypted password on-chain. This would require the user to remember another password off-chain to decrypt the stored password. However, you're also likely want to remove the view function as you wouldn't want the user to accidentally send a transaction with this decryption key.
 
-### 3. Create now the report using the [Go to Cyfrin Report template](report_exmaple.md)
+### 3. Create now the report using the [Cyfrin Report template](report_exmaple.md)
 
 ### 4. Create the pdf report using Pandoc and Latex plus the eisvogel.latex
 
