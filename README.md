@@ -49,3 +49,41 @@ cloc <file_or_folder_name> # Specify files or folders to be inspected
 #### 4. Start going through the code and TAKE NOTES! either on code, using a plugin or whatever.
 #### 5. Write a propper report. 
 
+## 3. Creating the report
+
+### 1. The first step is to document the findings following [Go to Cyfrin Finidng template](CyfrinFindingLayout.md) An example of it would be:
+## 1. [H-1] Storing the s_password on chain  makes it visible to anyone and no longer "private"
+
+**Description:**
+
+All data stored on-chain is visible to anyone. Therefore the private `PasswordStore::s_password'` variable which is intended to be private and only readble by owner via `PasswordStore::getPassword` function, is actually readble by everyone.
+
+**Impact:**
+
+ Anyone can read the private password, severly breaking  the functionality of the protocol
+
+
+**Proof of Concept:**
+
+- Create a locally running chain
+`` Make Anvil``
+- Deploy the contract to the chain
+`` Make Deploy``
+- Use the Foundry Storage tool
+`` cast storage <ADDRESS_HERE> 1 --rpc-url http://127.0.0.1:8545``
+- You will get 
+``0x6d7950617373776f726400000000000000000000000000000000000000000014``
+- You can then parse it with
+``cast parse-bytes32-string 0x6d7950617373776f726400000000000000000000000000000000000000000014``
+- And get the output
+``myPassword``
+
+**Recommended Mitigation:** 
+
+Due to this, the overall architecture of the contract should be rethought. One could encrypt the password off-chain, and then store the encrypted password on-chain. This would require the user to remember another password off-chain to decrypt the stored password. However, you're also likely want to remove the view function as you wouldn't want the user to accidentally send a transaction with this decryption key.
+
+### 3. Create now the report using the [Go to Cyfrin Report template](report_exmaple.md)
+
+### 4. Create the pdf report using Pandoc and Latex plus the eisvogel.latex
+
+
