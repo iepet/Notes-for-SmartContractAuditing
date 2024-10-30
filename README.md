@@ -19,7 +19,7 @@ Make sure there the clienthas the minimal onboarding information for us to start
 
 Scoping is the first step in any smart contract audit. This step involves understanding the scope of the audit, including identifying the roles, privileges, external dependencies, and potential vulnerabilities in the smart contract.
 
-### Rekt Test Questions
+### 1.1 Rekt Test Questions
 
 A useful approach to initiate scoping is to ask the client the following **Rekt Test questions**. These questions help establish the security baseline of the project and identify any potential weak points:
 
@@ -36,7 +36,7 @@ A useful approach to initiate scoping is to ask the client the following **Rekt 
 - **Do you undergo external audits and maintain a vulnerability disclosure or bug bounty program?**
 - **Have you considered and mitigated avenues for abusing users of your system?**
 
-### CLOC Tool Usage
+###1.2 CLOC Tool Usage
 
 The **CLOC** (Count Lines of Code) tool can be useful to analyze the codebase and gain an overview of its structure. Use it to count the number of lines and get an overview of the files within the codebase:
 
@@ -44,11 +44,16 @@ The **CLOC** (Count Lines of Code) tool can be useful to analyze the codebase an
 cloc . # Count lines of code in the current directory
 cloc <file_or_folder_name> # Specify files or folders to be inspected
 ````
+
+###1.3 Solidity Metrics
+You can us the vscode plugin solidity metrics by right clicking on the scope folder and selecting solidity metrics. It will print out a good Report.
+
 ## 2. Recon
 
-### THE TINCHO METHOD
+### 2.1 THE TINCHO METHOD
 #### 1. Download the code, use git to clone the repo locally, adapt the environment to whatever you are familiar with (FOUNDRY FOR THE WIN)
 #### 2. Read the Documentation, understand the architecture, learn specifc vocabullary and keyboards, other audit reports
+#####2.1 Read the Solidity Metrics report, maybe have a look at the Contract Summary to see which are the entry points to investigate. For instance all the EXTERNAL and PUBLIC functions might be a good starting point
 #### 3. Code and Contract ranking, use either Solidity Code Metrics or CLOC to get an overview, and rank the contracts based on complexity
 #### 4. Start going through the code and TAKE NOTES! either on code, using a plugin or whatever.
 #### 5. Write a propper report. 
