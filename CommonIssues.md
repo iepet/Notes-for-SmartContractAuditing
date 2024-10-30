@@ -10,22 +10,22 @@ Is there a hirearchy in the contract? Can everyone access everything? or should 
 ## LOOPS! CAn allow for DoS
 In the following example from UpdraftCyfrin course. For every new player, the gas cost willbe higher because you have to loop more times. if the attackar calls the function gasilion times, at the end only gasilioners will be able to enter raffle.
 
-´´´javacript
+```javascript
 function enterRaffle(address[] memory newPlayers) public payable {
-        //Audit I: It is not possible to enter yourself multiple times, as the function will revert if there are any duplicates
-        //Audit I: No error is being emmited if the entranceFee is not sent
-        require(msg.value == entranceFee * newPlayers.length, "PuppyRaffle: Must send enough to enter raffle");
-        for (uint256 i = 0; i < newPlayers.length; i++) {
-            players.push(newPlayers[i]);
-        }
-
-        // Check for duplicates
-        //Audit I: This is very gas inneficient
-        for (uint256 i = 0; i < players.length - 1; i++) {
-            for (uint256 j = i + 1; j < players.length; j++) {
-                require(players[i] != players[j], "PuppyRaffle: Duplicate player");
-            }
-        }
-        emit RaffleEnter(newPlayers);
+    //Audit I: It is not possible to enter yourself multiple times, as the function will revert if there are any duplicates
+    //Audit I: No error is being emitted if the entranceFee is not sent
+    require(msg.value == entranceFee * newPlayers.length, "PuppyRaffle: Must send enough to enter raffle");
+    for (uint256 i = 0; i < newPlayers.length; i++) {
+        players.push(newPlayers[i]);
     }
-´´´
+
+    // Check for duplicates
+    //Audit I: This is very gas inefficient
+    for (uint256 i = 0; i < players.length - 1; i++) {
+        for (uint256 j = i + 1; j < players.length; j++) {
+            require(players[i] != players[j], "PuppyRaffle: Duplicate player");
+        }
+    }
+    emit RaffleEnter(newPlayers);
+}
+```
