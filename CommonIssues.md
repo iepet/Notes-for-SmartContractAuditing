@@ -138,3 +138,10 @@ The security considerations outlined here include:
 Any field controlled by a caller can be manipulated. If randomness is generated from this field, it gives the caller control over the outcome.
 
 By using msg.sender we allow the caller the ability to mine for addresses until a favorable one is found, breaking the randomness of the system.
+
+## 6. Overflows and weak Typecasts
+
+In Solidity versions prio to 0.8.0, variables would reset with overflows, meaning a uint8 that got 255 if added 1 would go back to 0 and start over.
+In Solidity versios post 0.8.0 happens the same with Typecasts, if you have a variable and typecats it to uint8, it will overflow and reset if goes over 255.
+
+
